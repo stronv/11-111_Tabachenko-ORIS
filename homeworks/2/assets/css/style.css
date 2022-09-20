@@ -1,0 +1,179 @@
+body {
+	font-family: 'Nunito', sans-serif;
+}
+
+.container {
+	width: 100%;
+	margin: 0 auto;
+}
+
+/*FIRST_HEADER*/
+.header {
+}
+
+.header__inner1 {
+	padding-left: 25px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.text {
+	padding-top: 10px;
+}
+
+.text2 {
+	padding-top: 10px;
+	color: #FD6A21;
+}
+
+/*HEADER1_BUTTON*/
+.button {
+	float: right;
+	padding-left: 540px;
+	padding-top: 40px;
+	padding-right: 100px;
+}
+
+.header1 button {
+	color: black;
+	background-color: F3F3F7;
+	width: 60px;
+	height: 30px;
+	border-radius: 20px;
+	border: 1px;
+}
+/*SECOND_HEADER*/
+.header__inner2 {
+	padding-left: 25px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+/*HEADER2_BUTTON*/
+.header2 button {
+	color: white;
+	background-color: #FD6A21;
+	width: 100px;
+	height: 40px;
+	border-radius: 20px;
+	border: 1px;
+}
+.cart_button {
+	float: right;
+	padding-right: 100px;
+}
+
+.nav_link {
+	transition-duration: 0.4s;
+	padding-left: 25px;
+	text-decoration: none;
+	color: black;
+}
+.nav_link:hover {
+	color: #FD6A21;
+}
+
+/*HIGHLIGHT_SECTION*/
+
+/*FAST_MENU*/
+.row_item {
+	padding-left: 37px;
+	display: flex;
+}
+.rectangle1 {
+	box-shadow: 0 0 10px 10px rgba(0, 0, 0, .1);
+	position: relative;
+	width: 240px;
+	height: 90px;
+	background-color: white;
+	border-radius: 15px;
+	/*outline: 1px solid #000;*/
+	margin-right: 30px;
+}
+
+.rectangle1:hover {
+	box-shadow: 0 0 3px 3px rgba(0, 0, 0, .1);
+}
+
+.pic1 {
+	padding: 7px;
+}
+
+.pizza1__name {
+	position: absolute;
+	top: 0;
+	padding-left: 92px;
+	padding-top: 6px;
+}
+
+/*PIZZA__MAIN*/
+.pizza__zagolovok {
+	font-size: 35px;
+	padding-left: 50px;
+}
+.pizza__container {
+	padding-left: 15px;
+}
+.pizza_table {
+	border-spacing: 10px 30px;
+}
+.pizza_rectangle {
+	margin-right: 40px;
+	width: 300px;
+	height: 450px;
+/*	border-radius: 15px;
+	outline: 1px solid #000;*/
+}
+.pizza__image {
+	padding-left: 30px;
+	padding-top: 10px;
+}
+.pizza__image:hover {
+	padding-left: 30px;
+	padding-top: 14px;
+}
+.pizza__description {
+	padding-left: 12px;
+	padding-right: 20px;
+}
+.pizza__description_name {
+	font-size: 20px;
+}
+.pizza__description_text {
+	font-size: 15px;
+	color: #5C636F;
+}
+.price {
+	font-size: 20px;
+}
+
+.packit {
+	float: right;
+}
+.price button {
+	color: #CF5719;
+	background-color: #FFF0E7;
+	width: 80px;
+	height: 30px;
+	border-radius: 20px;
+	border: 1px;
+}
+
+.price button:hover {	
+	background-color: #FED2B5;
+}
+/*ABOUT_DODO*/
+
+.aboutDodo {
+	padding-left: 50px;
+}
+
+.text_table {
+	border-spacing: 15px;
+}
+.table_pizza {
+	padding-right: 25px;
+}
+
+
+
