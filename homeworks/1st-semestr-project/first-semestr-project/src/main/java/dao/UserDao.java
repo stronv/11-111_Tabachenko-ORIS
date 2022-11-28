@@ -1,16 +1,28 @@
 package dao;
 
 import entity.User;
-import util.ConnectionProvider;
 
 import javax.servlet.http.HttpSession;
 import java.sql.*;
 
 public class UserDao {
-    private ConnectionProvider connectionProvider;
 
-    public UserDao(ConnectionProvider connectionProvider) {
-        this.connectionProvider = connectionProvider;
+    private String dbURL = "jdbc:postgresql://localhost:5432/first-semestr-project";
+    private String dbName = "postgres";
+    private String dbpass = "1337";
+    private String dbDriver = "org.postgresql.Driver";
+
+    protected Connection getConnection() {
+        Connection connection = null;
+        try {
+            Class.forName(dbDriver);
+            connection = DriverManager.getConnection(dbURL, dbName, dbpass);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return connection;
     }
 
     private static final String insert_sql = "insert into users (email, username, password) values (?, ?, ?);";
