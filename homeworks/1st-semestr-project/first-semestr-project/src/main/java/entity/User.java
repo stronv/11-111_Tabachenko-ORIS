@@ -1,20 +1,19 @@
 package entity;
 
 public class User {
-    int id;
+    Integer id;
     String email;
     String username;
     String password;
 
     public User(String email, String username, String password) {
-        super();
+        this.id = null;
         this.email = email;
         this.username = username;
         this.password = password;
     }
 
     public User(int id, String email, String username, String password) {
-        super();
         this.id = id;
         this.email = email;
         this.username = username;

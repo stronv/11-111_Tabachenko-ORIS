@@ -1,50 +1,48 @@
 package Controllers;
 
 import dao.UserDao;
-import entity.User;
+import entity.Usser;
+import service.UsserService;
+import util.DbException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/authorization")
 public class AuthorizationServlet extends HttpServlet {
-
-    private UserDao userDao;
-
+    private UserDao usserDao;
+    private UsserService usserService;
     @Override
-    public void init() throws ServletException {
-        userDao = new UserDao();
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        usserDao = (UserDao) getServletContext().getAttribute("UsserDao");
+        usserService = (UsserService) getServletContext().getAttribute("UsserService");
     }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         getServletContext().getRequestDispatcher("/WEB-INF/view/authorization.jsp").forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
-        String username = req.getParameter("username");
         String password = req.getParameter("password");
-
-        try {
-            User user = new User(email,username,password);
-            boolean result = userDao.validateUser(user);
-            if (result == true) {
-                HttpSession session = req.getSession();
-                session.setAttribute("currentUser", user);
-                resp.sendRedirect(getServletContext().getContextPath() + "/profile");
-            } else {
-                resp.sendRedirect(getServletContext().getContextPath() + "/registration");
+        if (email != null && password != null) {
+            try {
+                Usser usser = usserDao.getUserByEmailAndPassword(email,password);
+                if (usser == null) {
+                    req.setAttribute("message", "Wrong email or password");
+                } else {
+                    usserService.auth(usser, req, resp);
+                    resp.sendRedirect(getServletContext().getContextPath() + "/profile");
+                }
+            } catch (DbException e) {
+                throw new ServletException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 }

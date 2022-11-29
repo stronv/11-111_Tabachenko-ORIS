@@ -9,7 +9,6 @@
         <form action="<c:url value="registration"/>" method="post" class="registration">
             <div class="logo">
                 <p>Create account.</p><br>
-                    <%--                <img src="assets/images/game-shop-logo.png" height="400" width="400"><br>--%>
                 <input name="username" type="text" placeholder="username"><br>
                 <input name="email" type="email" placeholder="email"><br>
                 <input name="password" type="password" placeholder="password"><br>
