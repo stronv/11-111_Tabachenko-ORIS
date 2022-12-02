@@ -4,15 +4,15 @@
 
 <%@ include file="/WEB-INF/view/_header.jsp" %>
 
-<t:mainLayout title="Authorization page">
-    <div class="authorizationForm">
-        <form action="<c:url value="registration"/>" method="post" class="registration">
+<t:mainLayout title="Registration page">
+    <div class="registrationForm">
+        <form action="<c:url value="registration"/>" method="post" class="profile">
             <div class="logo">
-                <p>Create account.</p><br>
+                <p>Register here:</p><br>
                 <input name="username" type="text" placeholder="username"><br>
                 <input name="email" type="email" placeholder="email"><br>
                 <input name="password" type="password" placeholder="password"><br>
-                <input name="nextButton" type="submit" value="Next"><br>
+                <input name="nextButton" type="submit" value="Submit"><br>
             </div>
         </form>
     </div>

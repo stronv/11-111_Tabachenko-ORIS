@@ -1,22 +1,26 @@
 package dao;
 
-import entity.Usser;
-import service.UsserService;
+import entity.User;
+import service.UserService;
 import util.ConnectionProvider;
 import util.DbException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class UserDao {
-    private UsserService usserService;
+    private User user;
+    private UserService userService;
     private ConnectionProvider connectionProvider;
     public UserDao(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
     }
-
-    public Usser getUserByEmailAndPassword(String email, String password) throws DbException {
+    public UserDao() {}
+    public User getUserByEmailAndPassword(String email, String password) throws DbException {
         try {
             PreparedStatement st = this.connectionProvider.getCon().prepareStatement(
                     "select * from users where email = ? and password = ?");
@@ -25,7 +29,7 @@ public class UserDao {
             ResultSet result = st.executeQuery();
             boolean hashOne = result.next();
             if (hashOne) {
-                return new Usser(
+                return new User(
                         result.getInt("id"),
                         result.getString("email"),
                         null
@@ -37,32 +41,49 @@ public class UserDao {
             throw new DbException("User didn't exists.", e);
         }
     }
-    public void insertUser(Usser usser) throws DbException {
+    public void insertUser(User user) throws DbException {
         try {
             PreparedStatement st = this.connectionProvider.getCon().prepareStatement(
                     "insert into users (email, username, password) values (?, ?, ?)");
-            st.setString(1, usser.getEmail());
-            st.setString(2, usser.getUsername());
-            st.setString(3, usser.getPassword());
+            st.setString(1, user.getEmail());
+            st.setString(2, user.getUsername());
+            st.setString(3, user.getPassword());
             st.executeUpdate();
         } catch (SQLException e) {
             throw new DbException("Can't register user.", e);
         }
     }
-    public void updateUsser(Usser usser) throws DbException {
-        boolean rowUpdated;
+    public void updateUser(User user) {
         try {
-
             PreparedStatement st = this.connectionProvider.getCon().prepareStatement(
                     "update users set email = ?, username = ?, password = ? where id = ?");
-            st.setString(1, usser.getUsername());
-            st.setString(2, usser.getEmail());
-            st.setString(3, usser.getPassword());
-            st.setInt(4, usser.getId());
+            st.setString(1, user.getEmail());
+            st.setString(2, user.getUsername());
+            st.setString(3, user.getPassword());
+            st.setInt(4, user.getId());
             st.execute();
 
         } catch (SQLException e) {
-            throw new DbException("Can't find user.", e);
+            throw new IllegalArgumentException( e);
         }
+    }
+    public List<User> selectAllUsers() {
+        List<User> users = new LinkedList<>();
+        try {
+            PreparedStatement st = this.connectionProvider.getCon().prepareStatement(
+                    "select * from users");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Integer id = rs.getInt("id");
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                users.add(new User(id, email, username, password));
+                System.out.println(users);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return users;
     }
 }

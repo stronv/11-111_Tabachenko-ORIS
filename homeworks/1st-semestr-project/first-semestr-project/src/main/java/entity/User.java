@@ -1,10 +1,17 @@
 package entity;
 
 public class User {
-    Integer id;
-    String email;
-    String username;
-    String password;
+    private Integer id;
+    private String email;
+    private String username;
+    private String password;
+
+//    public User(){}
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
     public User(String email, String username, String password) {
         this.id = null;
@@ -13,19 +20,17 @@ public class User {
         this.password = password;
     }
 
-    public User(int id, String email, String username, String password) {
+    public User(Integer id, String email, String username, String password) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.password = password;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public User(Integer id, String email, String password) {
         this.id = id;
+        this.email = email;
+        this.password = password;
     }
 
     public String getEmail() {
@@ -50,5 +55,41 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!username.equals(user.username)) return false;
+        return password != null ? password.equals(user.password) : user.password == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = username.hashCode();
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        return result;
     }
 }

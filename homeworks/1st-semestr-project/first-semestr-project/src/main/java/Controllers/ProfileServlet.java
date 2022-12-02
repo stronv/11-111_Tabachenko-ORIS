@@ -1,10 +1,12 @@
 package Controllers;
 
 import dao.UserDao;
-import entity.Usser;
+import entity.User;
+import service.UserService;
 import util.DbException;
 
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,31 +17,39 @@ import java.io.IOException;
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
 
-    private UserDao usserDao;
+    private UserDao userDao;
+    private UserService userService;
+    private User user;
     @Override
-    public void init() throws ServletException {
-        usserDao = (UserDao) getServletContext().getAttribute("UsserDao");
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        userDao = (UserDao) getServletContext().getAttribute("UserDao");
+        userService = (UserService) getServletContext().getAttribute("UserService");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        this.user = userService.getUser(req, resp);
+        req.getServletContext().getContextPath();
         getServletContext().getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(req, resp);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer id = Integer.valueOf(req.getParameter("id"));
-        String email = req.getParameter("email");
+        User user = (User) req.getSession().getAttribute("authUser");
+
         String username = req.getParameter("username");
+        String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        Usser usser = new Usser(id, email, username, password);
-        try {
-            usserDao.updateUsser(usser);
-        } catch (DbException e) {
-            throw new RuntimeException(e);
-        }
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password);
+
+        userDao.updateUser(user);
+
+        resp.sendRedirect(req.getContextPath() + "/profile");
     }
 }

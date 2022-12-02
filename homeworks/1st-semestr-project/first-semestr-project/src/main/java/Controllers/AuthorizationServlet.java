@@ -1,8 +1,8 @@
 package Controllers;
 
 import dao.UserDao;
-import entity.Usser;
-import service.UsserService;
+import entity.User;
+import service.UserService;
 import util.DbException;
 
 import javax.servlet.ServletConfig;
@@ -12,16 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/authorization")
 public class AuthorizationServlet extends HttpServlet {
-    private UserDao usserDao;
-    private UsserService usserService;
+    private UserDao userDao;
+    private UserService userService;
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        usserDao = (UserDao) getServletContext().getAttribute("UsserDao");
-        usserService = (UsserService) getServletContext().getAttribute("UsserService");
+        userDao = (UserDao) getServletContext().getAttribute("UserDao");
+        userService = (UserService) getServletContext().getAttribute("UserService");
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,18 +32,16 @@ public class AuthorizationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        if (email != null && password != null) {
-            try {
-                Usser usser = usserDao.getUserByEmailAndPassword(email,password);
-                if (usser == null) {
-                    req.setAttribute("message", "Wrong email or password");
-                } else {
-                    usserService.auth(usser, req, resp);
-                    resp.sendRedirect(getServletContext().getContextPath() + "/profile");
-                }
-            } catch (DbException e) {
-                throw new ServletException(e);
+        List<User> users = userDao.selectAllUsers();
+        System.out.println(users);
+
+        for (User user: users) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)){
+                req.getSession().setAttribute("authUser", user);
+                resp.sendRedirect(getServletContext().getContextPath() + "/profile");
+                return;
             }
         }
+        resp.sendRedirect(getServletContext().getContextPath() + "/authorization");
     }
 }

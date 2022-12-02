@@ -1,8 +1,8 @@
 package Controllers;
 
 import dao.UserDao;
-import entity.Usser;
-import service.UsserService;
+import entity.User;
+import service.UserService;
 import util.DbException;
 
 import javax.servlet.ServletConfig;
@@ -12,16 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
-    private UserDao usserDao;
-    private UsserService usserService;
+    private UserDao userDao;
+    private UserService userService;
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        usserDao = (UserDao) getServletContext().getAttribute("UsserDao");
-        usserService = (UsserService) getServletContext().getAttribute("UsserService");
+        userDao = (UserDao) getServletContext().getAttribute("UserDao");
+        userService = (UserService) getServletContext().getAttribute("UserService");
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,9 +36,10 @@ public class RegistrationServlet extends HttpServlet {
 
         if (email != null && username != null && password != null) {
             try {
-                Usser usser = new Usser(email, username, password);
-                usserDao.insertUser(usser);
-                    resp.sendRedirect(getServletContext().getContextPath() + "/profile");
+                User user = new User(email, username, password);
+                userDao.insertUser(user);
+                req.getSession().setAttribute("authUser", user);
+                    resp.sendRedirect(getServletContext().getContextPath() + "/authorization");
             } catch (DbException e) {
                 throw new ServletException(e);
             }

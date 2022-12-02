@@ -1,12 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Main page</title>
-</head>
-<body>
 
-</body>
-</html>
+<%@ include file="/WEB-INF/view/_header.jsp" %>
+
+<t:mainLayout title="Profile page">
+
+
+
+</t:mainLayout>
+
+<%@ include file="/WEB-INF/view/_footer.jsp" %>
