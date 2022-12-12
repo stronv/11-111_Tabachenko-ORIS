@@ -31,7 +31,9 @@ public class AuthorizationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        String role = req.getParameter("role");
         List<User> users = userDao.selectAllUsers();
+        System.out.println(users);
 
         for (User user: users) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {

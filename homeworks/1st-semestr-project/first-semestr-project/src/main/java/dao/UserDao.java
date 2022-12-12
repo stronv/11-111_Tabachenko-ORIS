@@ -77,7 +77,8 @@ public class UserDao {
                 String username = rs.getString("username");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
-                users.add(new User(id, email, username, password));
+                String role = rs.getString("role");
+                users.add(new User(id, email, username, password, role));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

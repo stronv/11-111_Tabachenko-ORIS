@@ -10,6 +10,7 @@
       Game Shop
     </a>
     <div class="collapse navbar-collapse" id="navbarNav">
+      <%--Left buttons--%>
       <ul class="navbar-nav">
         <li class="nav-item disabled">
           <a class="nav-link" href="<c:url value="/catalog"/>">
@@ -25,17 +26,28 @@
         </li>
         <% } %>
       </ul>
+          <%--Right buttons--%>
       <ul class="navbar-nav ms-lg-auto mx-3">
 
-        <% if (authUser != null) { %>
-        <li class="nav-item disabled">
-          <a class="nav-link" href="<c:url value="/log-out"/>">
-            Logout
-          </a>
-        </li>
+        <c:if test="${authUser != null}">
+          <c:if test="${authUser.getRole() == 'admin'}">
+            <li class="nav-item disabled">
+              <a class="nav-link" href="<c:url value="/addGame"/>">
+                Add Game
+              </a>
+            </li>
+          </c:if>
+        </c:if>
+
+        <% if (authUser != null) {%>
         <li class="nav-item disabled">
           <a class="nav-link" href="<c:url value="/profile"/>">
             Profile
+          </a>
+        </li>
+        <li class="nav-item disabled">
+          <a class="nav-link" href="<c:url value="/log-out"/>">
+            Logout
           </a>
         </li>
         <% } else { %>
