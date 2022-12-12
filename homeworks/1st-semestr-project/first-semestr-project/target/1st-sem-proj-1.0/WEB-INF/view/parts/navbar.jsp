@@ -28,7 +28,6 @@
       </ul>
           <%--Right buttons--%>
       <ul class="navbar-nav ms-lg-auto mx-3">
-
         <c:if test="${authUser != null}">
           <c:if test="${authUser.getRole() == 'admin'}">
             <li class="nav-item disabled">
