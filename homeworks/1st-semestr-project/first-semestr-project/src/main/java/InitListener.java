@@ -1,5 +1,5 @@
 import dao.UserDao;
-import entity.User;
+import Models.User;
 import service.UserService;
 import util.ConnectionProvider;
 import util.DbException;

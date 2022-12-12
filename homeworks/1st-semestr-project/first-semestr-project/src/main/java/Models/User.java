@@ -1,4 +1,4 @@
-package entity;
+package Models;
 
 public class User {
     private Integer id;

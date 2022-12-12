@@ -1,6 +1,6 @@
 package dao;
 
-import entity.User;
+import Models.User;
 import service.UserService;
 import util.ConnectionProvider;
 import util.DbException;
@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-
 
 public class UserDao {
     private User user;
@@ -79,7 +78,6 @@ public class UserDao {
                 String email = rs.getString("email");
                 String password = rs.getString("password");
                 users.add(new User(id, email, username, password));
-                System.out.println(users);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

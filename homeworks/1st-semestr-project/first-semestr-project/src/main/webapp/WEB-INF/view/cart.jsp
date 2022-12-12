@@ -2,12 +2,9 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ include file="/WEB-INF/view/_header.jsp" %>
+<%@ include file="/WEB-INF/view/parts/_header.jsp" %>
 
-<t:mainLayout title="Profile page">
-
-
-
+<t:mainLayout title="Cart page">
 </t:mainLayout>
 
-<%@ include file="/WEB-INF/view/_footer.jsp" %>
+<%@ include file="/WEB-INF/view/parts/_footer.jsp" %>

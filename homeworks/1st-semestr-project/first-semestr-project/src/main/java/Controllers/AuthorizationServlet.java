@@ -1,9 +1,8 @@
 package Controllers;
 
 import dao.UserDao;
-import entity.User;
+import Models.User;
 import service.UserService;
-import util.DbException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -33,13 +32,15 @@ public class AuthorizationServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         List<User> users = userDao.selectAllUsers();
-        System.out.println(users);
 
         for (User user: users) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)){
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                 req.getSession().setAttribute("authUser", user);
                 resp.sendRedirect(getServletContext().getContextPath() + "/profile");
+                req.setAttribute("message", "You have successfully registered!");
                 return;
+            } else {
+                req.setAttribute("message", "Wrong pair username-password.");
             }
         }
         resp.sendRedirect(getServletContext().getContextPath() + "/authorization");

@@ -1,9 +1,8 @@
 package Controllers;
 
 import dao.UserDao;
-import entity.User;
+import Models.User;
 import service.UserService;
-import util.DbException;
 
 
 import javax.servlet.ServletConfig;

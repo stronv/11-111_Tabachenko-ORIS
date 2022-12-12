@@ -1,7 +1,7 @@
 package service;
 
 import dao.UserDao;
-import entity.User;
+import Models.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,5 +22,6 @@ public class UserService {
     public List<User> getAllUsers() {
         return userDao.selectAllUsers();
     }
+
 }
 

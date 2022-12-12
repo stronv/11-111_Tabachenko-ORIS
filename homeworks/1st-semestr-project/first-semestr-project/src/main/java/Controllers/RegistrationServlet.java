@@ -1,7 +1,7 @@
 package Controllers;
 
 import dao.UserDao;
-import entity.User;
+import Models.User;
 import service.UserService;
 import util.DbException;
 
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
@@ -39,7 +38,7 @@ public class RegistrationServlet extends HttpServlet {
                 User user = new User(email, username, password);
                 userDao.insertUser(user);
                 req.getSession().setAttribute("authUser", user);
-                    resp.sendRedirect(getServletContext().getContextPath() + "/authorization");
+                    resp.sendRedirect(getServletContext().getContextPath() + "/main");
             } catch (DbException e) {
                 throw new ServletException(e);
             }
