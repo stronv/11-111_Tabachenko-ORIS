@@ -10,6 +10,13 @@ public class Game {
     public Game() {
     }
 
+    public Game(String title, String genre, String description, String price) {
+        this.title = title;
+        this.genre = genre;
+        this.description = description;
+        this.price = price;
+    }
+
     public Integer getId() {
         return id;
     }

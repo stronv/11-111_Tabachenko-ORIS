@@ -6,16 +6,16 @@
 
 <t:mainLayout title="Add game page">
     <div class="container">
-        <div class="input-group-lgrow justify-content-center align-items-center inner-row">
+        <div class="input-group-row justify-content-center align-items-center inner-row">
             <div class="col-md-5">
                 <div class="form-box">
                     <div class="form-title">
-                        <h2 class="fw-bold mb-3">Add new product here:</h2>
+                        <h2 class="fw-bold mb-3">Add new game here:</h2>
                     </div>
-                    <form>
+                    <form method="post" action="<c:url value="/addGame"/>" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Choose image: </label>
-                            <input class="form-control" type="file" id="formFile">
+                            <input class="form-control" name="image" type="file" id="formFile">
                         </div>
                         <div class="form-floating mb-3">
                             <input name="title" type="text" class="form-control form-control-sm"
@@ -28,7 +28,7 @@
                             <label for="floatingTitle">Genre</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="genre" type="text" class="form-control form-control-sm"
+                            <input name="description" type="text" class="form-control form-control-sm"
                                    placeholder="Description" id="floatingDescription">
                             <label for="floatingTitle">Description</label>
                         </div>

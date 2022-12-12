@@ -1,3 +1,4 @@
+import dao.GameDao;
 import dao.UserDao;
 import Models.User;
 import service.UserService;
@@ -29,6 +30,7 @@ public class InitListener implements ServletContextListener {
         try {
             ConnectionProvider connectionProvider = ConnectionProvider.getInstance();
             sce.getServletContext().setAttribute("UserDao", new UserDao(connectionProvider));
+            sce.getServletContext().setAttribute("GameDao", new GameDao(connectionProvider));
             sce.getServletContext().setAttribute("UserService", new UserService());
         } catch (DbException e) {
             throw new RuntimeException(e);
