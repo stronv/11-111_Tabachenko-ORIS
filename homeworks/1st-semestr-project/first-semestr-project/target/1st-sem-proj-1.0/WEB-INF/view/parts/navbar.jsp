@@ -13,8 +13,13 @@
       <%--Left buttons--%>
       <ul class="navbar-nav">
         <li class="nav-item disabled">
+          <a class="nav-link" href="<c:url value="/main"/>">
+            Main
+          </a>
+        </li>
+        <li class="nav-item disabled">
           <a class="nav-link" href="<c:url value="/catalog"/>">
-            Catalog
+            All Games
           </a>
         </li>
 
@@ -26,6 +31,8 @@
         </li>
         <% } %>
       </ul>
+
+
           <%--Right buttons--%>
       <ul class="navbar-nav ms-lg-auto mx-3">
         <c:if test="${authUser != null}">

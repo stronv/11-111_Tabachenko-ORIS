@@ -32,6 +32,9 @@
                         <span>Don't have account?</span>
                         <a href="<c:url value="/registration"/>">Create an account</a>
                     </div>
+                    <div class="mt-3">
+                        <a class="text-bg-danger"></a>
+                    </div>
                 </div>
             </div>
         </div>

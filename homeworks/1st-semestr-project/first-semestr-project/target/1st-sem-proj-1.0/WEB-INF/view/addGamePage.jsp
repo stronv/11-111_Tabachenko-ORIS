@@ -5,7 +5,7 @@
 <%@ include file="/WEB-INF/view/parts/_header.jsp" %>
 
 <t:mainLayout title="Add game page">
-    <div class="container">
+    <div class="container pt-5">
         <div class="input-group-row justify-content-center align-items-center inner-row">
             <div class="col-md-5">
                 <div class="form-box">
@@ -33,7 +33,7 @@
                             <label for="floatingTitle">Description</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="price" type="text" class="form-control form-control-sm"
+                            <input name="price" type="number" class="form-control form-control-sm"
                                    placeholder="Description" id="floatingPrice">
                             <label for="floatingTitle">Price</label>
                         </div>

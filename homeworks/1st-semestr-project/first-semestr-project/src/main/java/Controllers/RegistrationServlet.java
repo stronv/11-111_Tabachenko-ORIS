@@ -42,6 +42,8 @@ public class RegistrationServlet extends HttpServlet {
             } catch (DbException e) {
                 throw new ServletException(e);
             }
+        } else {
+
         }
     }
 }

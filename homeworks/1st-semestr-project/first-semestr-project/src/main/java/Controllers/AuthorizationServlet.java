@@ -38,7 +38,7 @@ public class AuthorizationServlet extends HttpServlet {
         for (User user: users) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                 req.getSession().setAttribute("authUser", user);
-                resp.sendRedirect(getServletContext().getContextPath() + "/profile");
+                resp.sendRedirect(getServletContext().getContextPath() + "/main");
                 req.setAttribute("message", "You have successfully registered!");
                 return;
             } else {

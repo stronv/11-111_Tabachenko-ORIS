@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ page import="Models.*" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dao.GameDao" %>
+<%@ page import="util.ConnectionProvider" %>
 
 <% User authUser = (User) request.getSession().getAttribute("authUser");
     if (authUser != null) {
@@ -16,7 +19,6 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="<c:url value="/style/css/bootstrap.css"/>">
-    <link rel="stylesheet" href="<c:url value="/style/css/form-group.css"/>">
     <link rel="stylesheet" href="<c:url value="/style/js/bootstrap.bundle.min.js"/>">
     <link rel="stylesheet" href="<c:url value="/style/css/main.css"/>">
 </head>

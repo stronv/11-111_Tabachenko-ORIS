@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Game;
+import Models.User;
 import dao.GameDao;
 import dao.UserDao;
 import service.UserService;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 
 @MultipartConfig(maxFileSize = 16177215)
@@ -37,35 +39,20 @@ public class AddGameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String tittle = req.getParameter("title");
+        String title = req.getParameter("title");
         String genre = req.getParameter("genre");
         String description = req.getParameter("description");
-        String price = req.getParameter("price");
+        Integer price = Integer.parseInt(req.getParameter("price"));
+        Part image = req.getPart("image");
+        String imageName = image.getSubmittedFileName();
 
-        Game game = new Game(tittle, genre, description, price);
+        if (title != null && genre != null && description != null) {
+            Game game = new Game(title, genre, description, price, image.getInputStream().readAllBytes(), imageName);
+            gameDao.saveGame(game);
 
-        InputStream inputStream = null;
-        String message = null;
-        Part filePart = req.getPart("image");
-
-        if (filePart != null) {
-            System.out.println(filePart.getName());
-            System.out.println(filePart.getSize());
-            System.out.println(filePart.getContentType());
-
-            // obtains input stream of the upload file
-            inputStream = filePart.getInputStream();
+        } else {
+            req.setAttribute("message", "All fields should be fill!.");
         }
-
-        int row = 0;
-        try {
-            row = gameDao.insertGame(game, inputStream);
-        } catch (DbException e) {
-            throw new RuntimeException(e);
-        }
-        if (row > 0) {
-            message = "File uploaded and saved into database";
-            System.out.println(message);
-        }
+        resp.sendRedirect(getServletContext().getContextPath() + "/authorization");
     }
 }
