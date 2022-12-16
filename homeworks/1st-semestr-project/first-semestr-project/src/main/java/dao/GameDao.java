@@ -2,6 +2,7 @@ package dao;
 
 import Models.Game;
 import util.ConnectionProvider;
+import util.DbException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,6 +62,21 @@ public class GameDao {
         }
     }
 
+    public boolean deleteGame(int id) throws DbException {
+        boolean rowDeleted;
+        try {
+            PreparedStatement st = this.connectionProvider.getCon().prepareStatement(
+                    "delete from games where id = ?");
+            st.setInt(1, id);
+            rowDeleted = st.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            throw new DbException("Can't delete game.", e);
+        }
+        return rowDeleted;
+    }
+
+
     public List<Game> getAllGames() {
         List<Game> games = new ArrayList<>();
         try {
@@ -77,6 +93,74 @@ public class GameDao {
                 String imageName = rs.getString("image_name");
                 byte[] image = rs.getBytes("image");
             games.add(new Game(id, title, genre, description, price, imageName, image));
+            }
+            return games;
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public List<Game> getActionGames() {
+        List<Game> games = new ArrayList<>();
+        try {
+            PreparedStatement st = this.connectionProvider
+                    .getCon()
+                    .prepareStatement("select * from addedgames where genre = 'Action' ");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Integer id = rs.getInt("id");
+                String title = rs.getString("title");
+                String genre = rs.getString("genre");
+                String description = rs.getString("description");
+                Integer price = rs.getInt("price");
+                String imageName = rs.getString("image_name");
+                byte[] image = rs.getBytes("image");
+                games.add(new Game(id, title, genre, description, price, imageName, image));
+            }
+            return games;
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public List<Game> getAdventureGames() {
+        List<Game> games = new ArrayList<>();
+        try {
+            PreparedStatement st = this.connectionProvider
+                    .getCon()
+                    .prepareStatement("select * from addedgames where genre = 'Adventure'");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Integer id = rs.getInt("id");
+                String title = rs.getString("title");
+                String genre = rs.getString("genre");
+                String description = rs.getString("description");
+                Integer price = rs.getInt("price");
+                String imageName = rs.getString("image_name");
+                byte[] image = rs.getBytes("image");
+                games.add(new Game(id, title, genre, description, price, imageName, image));
+            }
+            return games;
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+    public List<Game> getRPGGames() {
+        List<Game> games = new ArrayList<>();
+        try {
+            PreparedStatement st = this.connectionProvider
+                    .getCon()
+                    .prepareStatement("select * from addedgames where genre = 'RPG'");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Integer id = rs.getInt("id");
+                String title = rs.getString("title");
+                String genre = rs.getString("genre");
+                String description = rs.getString("description");
+                Integer price = rs.getInt("price");
+                String imageName = rs.getString("image_name");
+                byte[] image = rs.getBytes("image");
+                games.add(new Game(id, title, genre, description, price, imageName, image));
             }
             return games;
         } catch (SQLException e) {

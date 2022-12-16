@@ -13,6 +13,11 @@
       <%--Left buttons--%>
       <ul class="navbar-nav">
         <li class="nav-item disabled">
+          <a class="nav-link" href="<c:url value="/mainPage"/>">
+            Main
+          </a>
+        </li>
+        <li class="nav-item disabled">
           <a class="nav-link" href="<c:url value="/catalog"/>">
             All Games
           </a>

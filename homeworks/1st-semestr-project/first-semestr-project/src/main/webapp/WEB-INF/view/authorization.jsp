@@ -30,7 +30,7 @@
                     </form>
                     <div class="mt-3">
                         <span>Don't have account?</span>
-                        <a href="<c:url value="/registration"/>">Create an account</a>
+                        <a href="<c:url value="/registration"/>">Create an account</a> <br>
                     </div>
                     <div class="mt-3">
                         <a class="text-bg-danger"></a>

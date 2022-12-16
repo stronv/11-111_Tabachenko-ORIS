@@ -29,6 +29,12 @@
 <%--                            <button type="submit" class="btn btn-outline-primary"> Submit </button>--%>
                             <input type="submit" class="btn btn-success" value="Submit">
                         </div>
+                    </form> <br>
+                    <form action="<c:url value="/deleteUser"/>" method="get">
+                        <div class="mt-3">
+                            <span>You can </span>
+                            <input type="submit" class="btn btn-danger" value="Delete your account">
+                        </div>
                     </form>
                 </div>
             </div>

@@ -5,22 +5,26 @@
 <%@ include file="/WEB-INF/view/parts/_header.jsp" %>
 <t:mainLayout title="Cart page">
     <div class="container">
-        <div class="d-flex py-3">
-            <h3>Total price: 100$</h3>
-            <a class="mx-2 btn btn-primary" href="#"> Check Out</a>
-        </div>
-        <table class="table table-light">
+        <table class="table table-hover">
             <thead>
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Buy</th>
-                    <th scope="col">Cancel</th>
-                </tr>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+            </tr>
             </thead>
             <tbody>
+            <c:forEach items="${cart}" var="item">
+                <tr>
+                    <th>
+                        <img src="images/${item.getImageName()}" style="max-width: 500px; max-height: 205px;" class="img-fluid rounded-start" alt="...">
+                    </th>
+                    <th class="col-4">${item.getTitle()}</th>
+                    <th class="col-9">${item.getDescription()}</th>
+                    <th class="col-2">${item.getPrice()} $</th>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
     </div>

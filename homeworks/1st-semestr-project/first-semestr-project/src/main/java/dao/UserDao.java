@@ -1,7 +1,8 @@
 package dao;
 
+import Models.Game;
 import Models.User;
-import service.UserService;
+
 import util.ConnectionProvider;
 import util.DbException;
 
@@ -13,7 +14,6 @@ import java.util.List;
 
 public class UserDao {
     private User user;
-    private UserService userService;
     private ConnectionProvider connectionProvider;
     public UserDao(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
@@ -60,6 +60,7 @@ public class UserDao {
             throw new IllegalArgumentException( e);
         }
     }
+
     public List<User> selectAllUsers() {
         List<User> users = new LinkedList<>();
         try {

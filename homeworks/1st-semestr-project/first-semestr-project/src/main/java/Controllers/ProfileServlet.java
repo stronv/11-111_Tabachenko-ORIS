@@ -18,7 +18,7 @@ public class ProfileServlet extends HttpServlet {
 
     private UserDao userDao;
     private UserService userService;
-    private User user;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -28,7 +28,7 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.user = userService.getUser(req, resp);
+
         req.getServletContext().getContextPath();
         getServletContext().getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(req, resp);
 
