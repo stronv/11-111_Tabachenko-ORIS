@@ -31,7 +31,8 @@ public class AddToCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter("id"));
         Game game = gameDao.getGameById(id);
+        System.out.println(id);
         cartDao.addToCart(game);
-        resp.sendRedirect("gamePage");
+        resp.sendRedirect("game-page?id="+id);
     }
 }

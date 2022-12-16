@@ -26,6 +26,7 @@ public class GamePageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter("id"));
         Game game = gameDao.getGameById(id);
+        System.out.println(game);
         req.setAttribute("game", game);
         getServletContext().getRequestDispatcher("/WEB-INF/view/gamePage.jsp").forward(req, resp);
     }

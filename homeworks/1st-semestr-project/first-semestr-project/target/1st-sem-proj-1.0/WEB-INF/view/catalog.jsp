@@ -31,8 +31,8 @@
                                             <h5 class="card-title" name="title">${game.getTitle()}</h5>
                                             <p class="card-text text-truncate" name="description">${game.getDescription()}</p>
                                             <p class="card-text" name="price"><small class="text-muted h4">${game.getPrice()} $</small></p>
-                                            <button value="button" class="btn btn-success btn-sm"> More </button>
-<%--                                            <a href="<c:url value="/game-page?id=${game.getId()}"/>" class="btn btn-success btn-sm" role="button" aria-disabled="true"> more </a>--%>
+<%--                                            <button value="button" class="btn btn-success btn-sm"> More </button>--%>
+                                            <a href="<c:url value="/game-page?id=${game.getId()}"/>" class="btn btn-success btn-sm" role="button" aria-disabled="true"> more </a>
                                             <input type="hidden" name="id" value="${game.getId()}">
                                         </div>
                                     </div>

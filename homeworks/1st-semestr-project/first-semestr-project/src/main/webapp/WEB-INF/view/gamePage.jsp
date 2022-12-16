@@ -15,9 +15,11 @@
                         <h5 class="card-title" name="title">${game.getTitle()}</h5>
                         <p class="card-text" name="description" align="center">${game.getDescription()}</p>
                         <p class="card-text" name="price"><small class="text-muted h5">${game.getPrice()} $</small></p>
+
                         <c:if test="${authUser != null}">
-                            <button type="submit" class="btn btn-success btn-sm"> Add to cart </button>
+<%--                            <a href="<c:url value="/game-page?id=${game.getId()}"/>" class="btn btn-success btn-sm" role="button" aria-disabled="true"> Add to Cart </a>--%>
                             <input type="hidden" name="id" value="${game.getId()}">
+                            <input type="submit" class="btn btn-success btn-sm" value="Add to cart">
                         </c:if>
                         <c:if test="${authUser == null}">
                             <div class="mt-3">

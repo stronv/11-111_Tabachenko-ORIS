@@ -9,6 +9,7 @@ import util.DbException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,12 +23,21 @@ public class UserDao {
     public void insertUser(User user) throws DbException {
         try {
             PreparedStatement st = this.connectionProvider.getCon().prepareStatement(
-                    "insert into users (email, username, password) values (?, ?, ?)");
+                    "insert into users (email, username, password) values (?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
+
             st.setString(1, user.getEmail());
             st.setString(2, user.getUsername());
             st.setString(3, user.getPassword());
             st.executeUpdate();
-        } catch (SQLException e) {
+
+            ResultSet generatedKeys = st.getGeneratedKeys();
+
+            if (generatedKeys.next()) {
+                user.setId(generatedKeys.getInt("id"));
+            }
+
+            } catch (SQLException e) {
             throw new DbException("Can't register user.", e);
         }
     }
@@ -81,3 +91,4 @@ public class UserDao {
         return users;
     }
 }
+
