@@ -33,12 +33,10 @@ public class AuthorizationServlet extends HttpServlet {
         String password = req.getParameter("password");
         String role = req.getParameter("role");
         List<User> users = userDao.selectAllUsers();
-        System.out.println(users);
-
         for (User user: users) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                 req.getSession().setAttribute("authUser", user);
-                resp.sendRedirect(getServletContext().getContextPath() + "/main");
+                resp.sendRedirect(getServletContext().getContextPath() + "/catalog");
                 req.setAttribute("message", "You have successfully registered!");
                 return;
             } else {

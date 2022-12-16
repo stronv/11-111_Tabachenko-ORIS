@@ -19,27 +19,6 @@ public class UserDao {
         this.connectionProvider = connectionProvider;
     }
     public UserDao() {}
-    public User getUserByEmailAndPassword(String email, String password) throws DbException {
-        try {
-            PreparedStatement st = this.connectionProvider.getCon().prepareStatement(
-                    "select * from users where email = ? and password = ?");
-            st.setString(1, email);
-            st.setString(2, password);
-            ResultSet result = st.executeQuery();
-            boolean hashOne = result.next();
-            if (hashOne) {
-                return new User(
-                        result.getInt("id"),
-                        result.getString("email"),
-                        null
-                );
-            } else {
-                return null;
-            }
-        } catch (SQLException e) {
-            throw new DbException("User didn't exists.", e);
-        }
-    }
     public void insertUser(User user) throws DbException {
         try {
             PreparedStatement st = this.connectionProvider.getCon().prepareStatement(
@@ -52,6 +31,21 @@ public class UserDao {
             throw new DbException("Can't register user.", e);
         }
     }
+
+    public boolean deleteUser(int id) throws DbException {
+        boolean rowDeleted;
+        try {
+            PreparedStatement st = this.connectionProvider.getCon().prepareStatement(
+                    "delete from users where id = ?");
+            st.setInt(1, id);
+            rowDeleted = st.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            throw new DbException("Can't delete user.", e);
+        }
+        return rowDeleted;
+    }
+
     public void updateUser(User user) {
         try {
             PreparedStatement st = this.connectionProvider.getCon().prepareStatement(

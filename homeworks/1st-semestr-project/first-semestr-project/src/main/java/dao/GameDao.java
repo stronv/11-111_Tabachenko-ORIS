@@ -2,17 +2,11 @@ package dao;
 
 import Models.Game;
 import util.ConnectionProvider;
-import util.DbException;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class GameDao {
@@ -53,7 +47,6 @@ public class GameDao {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             rs.next();
-
             String title = rs.getString("title");
             String genre = rs.getString("genre");
             String description = rs.getString("description");

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -49,10 +50,9 @@ public class AddGameServlet extends HttpServlet {
         if (title != null && genre != null && description != null) {
             Game game = new Game(title, genre, description, price, image.getInputStream().readAllBytes(), imageName);
             gameDao.saveGame(game);
-
         } else {
             req.setAttribute("message", "All fields should be fill!.");
         }
-        resp.sendRedirect(getServletContext().getContextPath() + "/authorization");
+        resp.sendRedirect(getServletContext().getContextPath() + "/catalog");
     }
 }

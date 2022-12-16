@@ -14,7 +14,7 @@
                     <h5 class="card-title" name="title">${game.getTitle()}</h5>
                     <p class="card-text" name="description" align="center">${game.getDescription()}</p>
                     <p class="card-text" name="price"><small class="text-muted h5">${game.getPrice()} $</small></p>
-                    <button type="button" class="btn btn-success btn-sm">Add to cart</button>
+                    <a href="#" class="btn btn-success btn-sm" role="button" aria-disabled="true">Add to cart</a>
                 </div>
             </div>
         </div>

@@ -26,7 +26,8 @@
                             <label for="floatingPass">Password</label>
                         </div>
                         <div class="mt-3">
-                            <button type="submit" class="btn btn-outline-primary"> Submit </button>
+<%--                            <button type="submit" class="btn btn-outline-primary"> Submit </button>--%>
+                            <input type="submit" class="btn btn-success" value="Submit">
                         </div>
                     </form>
                 </div>

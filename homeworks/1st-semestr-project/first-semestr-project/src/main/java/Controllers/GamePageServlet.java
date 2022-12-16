@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet("/game-page")
 public class GamePageServlet extends HttpServlet {
@@ -24,11 +25,8 @@ public class GamePageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter("id"));
-
         Game game = gameDao.getGameById(id);
-
         req.setAttribute("game", game);
-
         getServletContext().getRequestDispatcher("/WEB-INF/view/gamePage.jsp").forward(req, resp);
     }
 

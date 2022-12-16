@@ -38,12 +38,10 @@ public class RegistrationServlet extends HttpServlet {
                 User user = new User(email, username, password);
                 userDao.insertUser(user);
                 req.getSession().setAttribute("authUser", user);
-                    resp.sendRedirect(getServletContext().getContextPath() + "/main");
+                    resp.sendRedirect(getServletContext().getContextPath() + "/catalog");
             } catch (DbException e) {
                 throw new ServletException(e);
             }
-        } else {
-
         }
     }
 }
